@@ -101,8 +101,7 @@ const v$ = useVuelidate(rules, form)
 const login = async () => {
   try {
     loading.value = true
-
-    const response = await axios.post('/login', { ...form })
+    const response = await authStore.handleLogin(form)
 
     if (response) {
       setTimeout(async () => {

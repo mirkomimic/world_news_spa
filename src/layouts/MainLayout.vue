@@ -2,7 +2,11 @@
   <div>
     <NavBar/>
     <div class="min-h-screen">
-      <slot/>
+      <Transition name="fade" appear>
+        <div>
+          <slot/>
+        </div>
+      </Transition>
     </div>
   </div>
 </template>

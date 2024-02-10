@@ -1,10 +1,9 @@
-// import './assets/main.css'
-// import 'primevue/resources/themes/aura-dark-blue/theme.css'
 import 'primeicons/primeicons.css'
 
 import { createApp, markRaw } from 'vue'
 import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+import "/node_modules/flag-icons/css/flag-icons.min.css";
 
 import App from './App.vue'
 import router from './router'

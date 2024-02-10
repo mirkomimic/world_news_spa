@@ -4,7 +4,7 @@
       <template #start>
         <router-link :to="{name: 'Home'}" class="flex items-center gap-3">
           <Image src="/images/news-icon.png" alt="Image" width="40" />
-          <div class="me-5 text-gray-100">World News</div>
+          <div class="font-mono font-bold me-5 text-gray-100">World News</div>
         </router-link>
       </template>
       <!-- <template #item="{ item, props, hasSubmenu }">
@@ -22,6 +22,9 @@
       </template> -->
       <template #end>
         <div class="flex gap-3">
+          <router-link v-if="authStore.user" :to="{name: 'Dashboard'}">
+            <Button label="Dashboard" class="border-gray-400 text-gray-100" size="small" outlined/>
+          </router-link>
           <router-link v-if="!authStore.user" :to="{name: 'Login'}">
             <Button label="Login" class="border-gray-400 text-gray-100" size="small" outlined/>
           </router-link>
@@ -39,12 +42,6 @@
           <div v-if="authStore.user" class="flex">
             <Avatar @click="toggle" image="/images/user-placeholder.png" class="mr-2 w-[37px] h-[37px] cursor-pointer" shape="circle" aria-haspopup="true" aria-controls="overlay_menu"/>
             <Menu ref="menu" id="overlay_menu" :model="items" :popup="true"/>
-
-            <!-- <div class="card flex justify-content-center">
-              <Button type="button" icon="pi pi-ellipsis-v" @click="toggle" aria-haspopup="true" aria-controls="overlay_menu" />
-              <Menu ref="menu" id="overlay_menu" :model="items" :popup="true" />
-            </div> -->
-
           </div>
         </div>
       </template>
@@ -84,8 +81,8 @@ const toggleTheme = () => {
 const logout = async () => {
   
   try {
-    authStore.handleLogout()
-    const response = await axios.post('/logout')
+    const response = await authStore.handleLogout()
+    
     if (response) {
       router.go()
     }
@@ -96,7 +93,7 @@ const logout = async () => {
 
 const items = ref([
   {
-    label: 'Options',
+    label: `${authStore.user?.name}`,
     items: [
       {
         key: 1,

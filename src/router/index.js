@@ -39,6 +39,18 @@ const router = createRouter({
       component: () => import('@/views/auth/ResetPassword.vue'),
       meta: { title: 'Reset Password' }
     },
+    {
+      path: '/dashboard',
+      name: 'Dashboard',
+      component: () => import('@/views/admin/Dashboard.vue'),
+      meta: { title: 'Dashboard' }
+    },
+    {
+      path: '/dashboard/news',
+      name: 'DashboardNews',
+      component: () => import('@/views/admin/News.vue'),
+      meta: { title: 'Dashboard | News' }
+    },
   ]
 })
 

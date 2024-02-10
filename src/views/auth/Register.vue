@@ -98,12 +98,14 @@
 </template>
 
 <script setup>
+import { useAuthStore } from '@/stores/auth';
 import { useVuelidate } from '@vuelidate/core'
 import { required, email, sameAs, helpers, minLength } from '@vuelidate/validators'
 import axios from 'axios';
 import { computed, reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
+const authStore = useAuthStore()
 const router = useRouter()
 const errorMsg = ref(null) // server
 const otherError = ref(null) // server
@@ -140,11 +142,12 @@ const v$ = useVuelidate(rules, form)
 const register = async () => {
   try {
     loading.value = true
-    const response = await axios.post('/register', { ...form });
+    const response = await authStore.handleRegister(form)
 
     if (response) {
-      setTimeout(() => {
+      setTimeout(async () => {
         loading.value = false
+        await authStore.getUser()
         router.push({ name: 'Home' });
       }, 2000);
     }

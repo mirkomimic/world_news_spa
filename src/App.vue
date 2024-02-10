@@ -1,15 +1,16 @@
 <script setup>
+import { onMounted } from 'vue';
+import { useAuthStore } from './stores/auth';
 
+const authStore = useAuthStore()
+
+onMounted(async () => {
+  if (authStore.user) {
+    await authStore.getUser()  
+  }
+})
 </script>
 
 <template>
-  <!-- <Transition name="fade">
-    <RouterView />
-  </Transition> -->
-
-  <router-view v-slot="{ Component }">
-    <transition name="fade">
-      <component :is="Component" />
-    </transition>
-  </router-view>
+  <RouterView />
 </template>
