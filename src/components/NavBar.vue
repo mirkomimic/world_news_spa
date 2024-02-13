@@ -1,5 +1,8 @@
 <template>
-  <div class="bg-blue-900">
+  <div 
+    class="bg-blue-900 top-0 z-10"
+    :class="{'sticky bg-blue-900/50 backdrop-filter backdrop-blur-md': navbarScroll}"
+  >
     <Menubar class="container border-0 rounded-none sticky bg-transparent mx-auto h-[50px]">
       <template #start>
         <router-link :to="{name: 'Home'}" class="flex items-center gap-3">
@@ -50,7 +53,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { usePrimeVue } from 'primevue/config';
 import axios from "axios";
 import { useRouter } from "vue-router";
@@ -60,6 +63,29 @@ const PrimeVue = usePrimeVue();
 const menu = ref()
 const router = useRouter()
 const authStore = useAuthStore()
+const navbarScroll = ref(false)
+
+// const classObject = computed(() => ({
+//   'bg-red-400': window.scroll > 300
+// }))
+
+// const navbarScroll = computed(() => {
+//   if (window.scrollY > 350) {
+//     return true
+//   } else {
+//     return false
+//   }
+// })
+
+window.onscroll = function() {
+  if (window.scrollY > 300) {
+    navbarScroll.value = true
+  } else {
+    navbarScroll.value = false
+  }
+
+// console.log(window.scrollY);      
+};
 
 const currentTheme = ref('aura-dark-blue');
 

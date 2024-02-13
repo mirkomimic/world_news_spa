@@ -46,10 +46,16 @@ const router = createRouter({
       meta: { title: 'Dashboard' }
     },
     {
-      path: '/dashboard/news',
-      name: 'DashboardNews',
+      path: '/dashboard/newsapi',
+      name: 'DashboardNewsApi',
       component: () => import('@/views/admin/News.vue'),
       meta: { title: 'Dashboard | News' }
+    },
+    {
+      path: '/dashboard/published-news',
+      name: 'DashboardPublishedNews',
+      component: () => import('@/views/admin/PublishedNews.vue'),
+      meta: { title: 'Dashboard | Published News' }
     },
   ]
 })

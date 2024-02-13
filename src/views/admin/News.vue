@@ -1,6 +1,6 @@
 <template>
   <AdminLayout>
-    <template #heading>Dashboard - News</template>
+    <template #heading>Dashboard - NewsAPI</template>
 
     <div class="grid grid-cols-3">
       <div class="col-span-1"></div>
@@ -19,14 +19,15 @@
       <SelectButton
         v-model="form.category"
         :options="categories"
-        aria-labelledby="multiple"
+        optionLabel="name"
+        optionValue="name"
       />
     </div>
 
     <Card class="mt-3 min-h-screen">
       <template #title>
         Top Headlines - 
-        <span v-if="news" class="text-gray-400">{{ news.totalResults }} found.</span>
+        <span v-if="news" class="text-gray-400">{{ news.totalResults }} results</span>
         <Divider/>
       </template>
       <template #content>
@@ -36,6 +37,7 @@
           :key="index"
           :article="article" 
           :loading="loading"
+          :categories="categories"
         />
         <div v-else>No Results Found!</div>
       </template>
@@ -61,8 +63,9 @@ import NewsApiArticleCard from '@/components/cards/newsApiArticleCard.vue';
 import SelectCountry from '@/components/form-inputs/SelectCountry.vue';
 import AdminLayout from '@/layouts/AdminLayout.vue';
 import axios from 'axios';
-import { onMounted, ref, watchEffect } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import debounce from 'lodash.debounce';
 
 const categories = ref(null)
 const news = ref(null)
@@ -80,17 +83,28 @@ const form = ref({
   page: parseInt(route.query.page)
 })
 
-const getData = async () => {
+const getCategories = async () => {
+  try {
+    const response = await axios.get('api/category')
+
+    if (response.status === 200) {
+      categories.value = response.data.categories;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+const getData = debounce(async () => {
   loading.value = true
   try {
-    const response = await axios.post('/api/news', 
+    const response = await axios.post('/api/newsapi', 
     {
       ...form.value,
       country: form.value.country?.toLowerCase(),
     });
 
     if (response.status === 200) {
-      categories.value = response.data.categories;
       news.value = response.data.news;
       loading.value = false
 
@@ -105,14 +119,15 @@ const getData = async () => {
     console.log(error);
     loading.value = false
   }
-}
+}, 1000)
 
 onMounted( () => {
   getData();
+  getCategories();
 })
 
 
-watchEffect(form => {
+watch(form.value, () => {
   getData()
 })
 

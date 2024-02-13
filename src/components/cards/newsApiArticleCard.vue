@@ -16,13 +16,20 @@
       {{ props.article.content }}
     </template>
     <template #footer>
-      <div>
-        {{ moment(props.article.publishedAt).startOf('minute').fromNow() }}
-      </div>
-      <div>
-        <a :href="props.article.url" target="_blank">
-          <Button label="Read full article" link class="p-0" />
-        </a>
+      <div class="flex">
+        <div>
+          <div>
+            {{ moment(props.article.publishedAt).startOf('minute').fromNow() }}
+          </div>
+          <div>
+            <a :href="props.article.url" target="_blank">
+              <Button label="Read full article" link class="p-0" />
+            </a>
+          </div>
+        </div>
+        <div class="ms-auto">
+          <CreateNewsDialog :article="props.article" :categories="props.categories"/>
+        </div>
       </div>
     </template>
   </Card>
@@ -31,6 +38,7 @@
 
 <script setup>
 import moment from "moment";
+import CreateNewsDialog from "../dialogs/CreateNewsDialog.vue";
 
-const props = defineProps(['article', 'loading'])
+const props = defineProps(['article', 'loading', 'categories'])
 </script>

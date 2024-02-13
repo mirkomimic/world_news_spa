@@ -4,7 +4,7 @@
     <div class="min-h-screen">
       <div class="grid grid-cols-3 items-center">
         <AdminSidebar/>
-        <h1 class="justify-self-center">
+        <h1 class="justify-self-center text-lg">
           <slot name="heading"/>
         </h1>
       </div>
