@@ -9,6 +9,7 @@ import App from './App.vue'
 import router from './router'
 import './axios.js'
 import PrimeVue from 'primevue/config'
+import ToastService from 'primevue/toastservice';
 
 const app = createApp(App)
 const pinia = createPinia()
@@ -20,6 +21,7 @@ const pinia = createPinia()
 app.use(pinia)
 pinia.use(piniaPluginPersistedstate)
 app.use(router)
+app.use(ToastService)
 app.use(PrimeVue)
 
 app.mount('#app')
