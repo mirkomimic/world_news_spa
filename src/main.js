@@ -21,7 +21,7 @@ const pinia = createPinia()
 app.use(pinia)
 pinia.use(piniaPluginPersistedstate)
 app.use(router)
-app.use(ToastService)
 app.use(PrimeVue)
+app.use(ToastService)
 
 app.mount('#app')

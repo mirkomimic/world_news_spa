@@ -57,6 +57,12 @@ const router = createRouter({
       component: () => import('@/views/admin/PublishedNews.vue'),
       meta: { title: 'Dashboard | Published News' }
     },
+    {
+      path: '/article/:id',
+      name: 'Article',
+      component: () => import('@/views/news/Article.vue'),
+      meta: { title: 'Article' }
+    },
   ]
 })
 

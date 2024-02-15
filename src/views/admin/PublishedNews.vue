@@ -11,7 +11,7 @@
         <Divider/>
       </template>
       <template #content>
-        <DataView v-if="news" :value="news.articles">
+        <DataView v-if="news" :value="news.articles" paginator :rows="5">
           <template #list="slotProps">
             <div v-for="(article, index) in slotProps.items" :key="index">
               <NewsArticleCard
@@ -35,6 +35,7 @@ import axios from 'axios';
 import { onMounted, ref } from 'vue';
 import { useToast } from 'primevue/usetoast';
 import Toast from 'primevue/toast';
+import router from '@/router';
 
 // const props = defineProps(['successMsg'])
 
@@ -70,6 +71,8 @@ const getCategories = async () => {
 
 const showToast = ($message) => {
   toast.add({ severity: 'info', summary: 'Info', detail: $message, life: 5000 });
+
+  getNews();
 };
 
 onMounted(() => {

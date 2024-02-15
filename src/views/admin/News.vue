@@ -109,7 +109,7 @@ const getData = debounce(async () => {
       loading.value = false
 
       router.push({
-        name: 'DashboardNews',
+        name: 'DashboardNewsApi',
         query: {...response.data.params}
       })
 

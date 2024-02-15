@@ -207,9 +207,3 @@ const edit = async (id) => {
   }
 }
 </script>
-
-<style >
-.toastFix {
-  border-color: red !important;
-}
-</style>

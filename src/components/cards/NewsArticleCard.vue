@@ -7,7 +7,9 @@
 
   <Card v-else class="m-3 shadow-none">
     <template #title>
-      {{ props.article.title }}
+      <router-link :to="`/article/${props.article.id}`" class="hover:underline">
+        {{ props.article.title }}
+      </router-link>
     </template>
     <template #subtitle>
       {{ props.article.author }}
@@ -27,8 +29,16 @@
             </a>
           </div>
         </div>
-        <div class="ms-auto">
-          <EditNewsDialog :article="props.article" :categories="props.categories" @success-msg="(message) => $emit('successMsg', message)"/>
+        <div class="ms-auto flex gap-3">
+          <EditNewsDialog
+            :article="props.article"
+            :categories="props.categories"
+            @success-msg="(message) => $emit('successMsg', message)" 
+          />
+          <DeleteNewsDialog
+            :article-id="props.article.id"
+            @success-msg="(message) => $emit('successMsg', message)"
+          />
         </div>
       </div>
     </template>
@@ -39,6 +49,11 @@
 <script setup>
 import moment from "moment";
 import EditNewsDialog from "../dialogs/EditNewsDialog.vue";
+import Toast from "primevue/toast";
+import { useToast } from "primevue/usetoast";
+import DeleteNewsDialog from "../dialogs/DeleteNewsDialog.vue";
+
+const toast = useToast();
 
 const props = defineProps(['article', 'loading', 'categories'])
 const emit = defineEmits(['successMsg'])
