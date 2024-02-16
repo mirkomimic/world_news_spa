@@ -53,9 +53,8 @@
 </template>
 
 <script setup>
-import { computed, ref } from "vue";
+import { ref } from "vue";
 import { usePrimeVue } from 'primevue/config';
-import axios from "axios";
 import { useRouter } from "vue-router";
 import { useAuthStore } from '@/stores/auth.js';
 

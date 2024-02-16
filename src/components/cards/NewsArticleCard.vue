@@ -5,7 +5,7 @@
     <Skeleton width="5rem" borderRadius="16px" class="mb-2"></Skeleton>
   </div>
 
-  <Card v-else class="m-3 shadow-none">
+  <Card v-else class="m-3 shadow-none bg-transparent">
     <template #title>
       <router-link :to="`/article/${props.article.id}`" class="hover:underline">
         {{ props.article.title }}
@@ -29,7 +29,7 @@
             </a>
           </div>
         </div>
-        <div class="ms-auto flex gap-3">
+        <div v-if="authStore.user.is_admin" class="ms-auto flex gap-3">
           <EditNewsDialog
             :article="props.article"
             :categories="props.categories"
@@ -52,8 +52,10 @@ import EditNewsDialog from "../dialogs/EditNewsDialog.vue";
 import Toast from "primevue/toast";
 import { useToast } from "primevue/usetoast";
 import DeleteNewsDialog from "../dialogs/DeleteNewsDialog.vue";
+import { useAuthStore } from "@/stores/auth";
 
 const toast = useToast();
+const authStore = useAuthStore()
 
 const props = defineProps(['article', 'loading', 'categories'])
 const emit = defineEmits(['successMsg'])

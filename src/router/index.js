@@ -48,7 +48,7 @@ const router = createRouter({
     {
       path: '/dashboard/newsapi',
       name: 'DashboardNewsApi',
-      component: () => import('@/views/admin/News.vue'),
+      component: () => import('@/views/admin/NewsApi.vue'),
       meta: { title: 'Dashboard | News' }
     },
     {
