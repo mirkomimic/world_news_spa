@@ -1,7 +1,7 @@
 <template>
   <div>
     <NavBar/>
-    <div class="min-h-screen">
+    <div class="min-h-[calc(100vh-50px)]">
       <Transition name="fade" appear>
         <div>
           <slot/>

@@ -1,0 +1,3 @@
+https://docs.stripe.com/payments/accept-a-payment?platform=web&ui=elements&client=js#set-up-stripe
+
+https://docs.stripe.com/api/payment_intents/cancel

@@ -63,6 +63,24 @@ const router = createRouter({
       component: () => import('@/views/news/Article.vue'),
       meta: { title: 'Article' }
     },
+    {
+      path: '/donate',
+      name: 'DonateIndex',
+      component: () => import('@/views/donate/Index.vue'),
+      meta: { title: 'Donate' }
+    },
+    {
+      path: '/donate/checkout',
+      name: 'DonateCheckout',
+      component: () => import('@/views/donate/Checkout.vue'),
+      meta: { title: 'Checkout' }
+    },
+    {
+      path: '/donate/success',
+      name: 'DonateSuccess',
+      component: () => import('@/views/donate/success.vue'),
+      meta: { title: 'Success' }
+    },
   ]
 })
 

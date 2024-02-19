@@ -5,6 +5,7 @@ export const useAuthStore = defineStore('auth', {
   persist: true,
   state: () => ({
     authUser: null,
+    intentSecret: '',
   }),
   getters: {
     user: (state) => state.authUser,

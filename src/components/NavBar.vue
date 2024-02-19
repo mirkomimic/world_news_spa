@@ -25,6 +25,9 @@
       </template> -->
       <template #end>
         <div class="flex gap-3">
+          <router-link :to="{name: 'DonateIndex'}">
+            <Button label="Donate" class="border-gray-400 text-gray-100" size="small" outlined/>
+          </router-link>
           <router-link v-if="authStore.user" :to="{name: 'Dashboard'}">
             <Button label="Dashboard" class="border-gray-400 text-gray-100" size="small" outlined/>
           </router-link>
