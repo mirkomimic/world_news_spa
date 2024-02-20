@@ -52,6 +52,13 @@ const items = ref([
     label: 'Users',
     icon: 'pi pi-users',
     url: 'https://vuejs.org/'
-  }
+  },
+  {
+    label: 'Payments',
+    icon: 'pi pi-credit-card',
+    command: () => {
+      router.push({name: 'DashboardPayments'});
+    }
+  },
 ]);
 </script>

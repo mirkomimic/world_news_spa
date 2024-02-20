@@ -58,6 +58,12 @@ const router = createRouter({
       meta: { title: 'Dashboard | Published News' }
     },
     {
+      path: '/dashboard/payments',
+      name: 'DashboardPayments',
+      component: () => import('@/views/admin/Payments.vue'),
+      meta: { title: 'Dashboard | Payments' }
+    },
+    {
       path: '/article/:id',
       name: 'Article',
       component: () => import('@/views/news/Article.vue'),
